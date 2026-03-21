@@ -711,6 +711,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
 }
 
 .cover-preview img { width: 100%; height: 100%; object-fit: cover; }
@@ -723,6 +724,24 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-faint);
   font-size: 0.8rem;
 }
+
+/* Hover overlay on cover when an image is loaded */
+.cover-change-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+.cover-preview:hover .cover-change-overlay { display: flex; }
 
 .cover-actions {
   display: flex;
@@ -745,12 +764,37 @@ a { color: inherit; text-decoration: none; }
   position: relative;
 }
 
-.screenshot-admin-item img {
+.ss-img-wrap {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ss-img-wrap img {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
   display: block;
+  transition: filter 0.15s;
 }
+.ss-img-wrap:hover img { filter: brightness(0.55); }
+
+.ss-change-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+.ss-img-wrap:hover .ss-change-overlay { opacity: 1; pointer-events: auto; }
 
 .screenshot-admin-caption {
   padding: 6px 8px;

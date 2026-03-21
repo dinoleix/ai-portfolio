@@ -500,15 +500,38 @@ document.getElementById('screenshotFileInput').addEventListener('change', e => {
 function renderModalScreenshots() {
   const list = document.getElementById('screenshotsList');
   list.innerHTML = modalScreenshots.map((s, i) => `
-    <div class="screenshot-admin-item">
-      <img src="${s.url || s.src || ''}" alt="" />
+    <div class="screenshot-admin-item" id="ss-item-${i}">
+      <div class="ss-img-wrap">
+        <img src="${s.url || s.src || ''}" alt="" />
+        <div class="ss-change-overlay" onclick="replaceScreenshot(${i})">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Change
+        </div>
+      </div>
       <div class="screenshot-admin-caption">
         <input type="text" value="${esc(s.caption)}" placeholder="Caption (optional)"
-          onchange="modalScreenshots[${i}].caption = this.value" />
+          oninput="modalScreenshots[${i}].caption = this.value" />
       </div>
-      <button class="screenshot-remove-btn" onclick="removeModalScreenshot(${i})">&times;</button>
+      <button class="screenshot-remove-btn" onclick="removeModalScreenshot(${i})" title="Remove">&times;</button>
     </div>
   `).join('');
+}
+
+function replaceScreenshot(i) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    readFileAsBase64(file, base64 => {
+      modalScreenshots[i].url = base64;
+      // Update just the img src without full re-render (preserves caption edits)
+      const item = document.getElementById(`ss-item-${i}`);
+      if (item) item.querySelector('img').src = base64;
+    });
+  };
+  input.click();
 }
 
 function removeModalScreenshot(i) {

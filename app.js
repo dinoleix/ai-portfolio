@@ -18,12 +18,22 @@ const DEFAULT_DATA = {
     { value: 500, label: 'GitHub Stars' },
     { value: 8, label: 'Technologies' }
   ],
-  techStack: ['Python', 'LangChain', 'OpenAI API', 'Anthropic Claude', 'RAG', 'Vector DBs', 'FastAPI', 'React', 'Docker', 'AWS'],
+  techStack: ['React', 'TypeScript', 'Google Gemini AI', 'Firebase', 'Vite', 'Python', 'LangChain', 'OpenAI API', 'Anthropic Claude', 'RAG', 'FastAPI', 'Docker'],
   projects: [
-    { id: 'p1', featured: true,  title: 'AI Knowledge Assistant',   desc: 'An enterprise-grade RAG system that lets teams query internal documents using natural language. Built with LangChain, ChromaDB, and Claude API — reduces support ticket volume by surfacing answers instantly.',           tags: ['LLM', 'RAG', 'Python'],             github: 'https://github.com/yourusername/ai-knowledge-assistant', cover: null, screenshots: [] },
-    { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',                                                                      tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/yourusername/autonomous-it-agent',     cover: null, screenshots: [] },
-    { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',                                                     tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/yourusername/ai-briefing-bot',         cover: null, screenshots: [] },
-    { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.',                                               tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/yourusername/llm-fine-tuner',           cover: null, screenshots: [] }
+    {
+      id: 'neko-metrics',
+      featured: true,
+      title: 'Neko Metrics — AI Business Intelligence Platform',
+      desc: 'A production-grade, AI-augmented Business Intelligence platform built from scratch to manage a multi-outlet restaurant chain. Replaces spreadsheets with a real-time Gemini-AI-powered intelligence layer — giving executives, operations managers, and crew a single source of truth for every financial and operational decision.\n\nThe AI core (Google Gemini) generates on-demand strategic diagnostic reports in the Margin Intelligence module — analysing revenue quality, cost structure, and efficiency signals across all active outlets. A custom Projection Engine forecasts revenue trajectories from historical velocity data. Firebase powers real-time sync and multi-user auth. Weather data is integrated contextually to correlate footfall with environmental conditions.\n\nKey modules: CEO Dashboard (global KPIs + outlet yield rankings), Sales Intelligence (velocity, trajectory, day-part & AI projections), P&L Command (settled revenue vs. operational burn + profit waterfall), Expense Radar (COGS + outflow reconciliation), Waste Radar v2 (material reconciliation & relational drift analysis), Margin Intelligence (AI-generated strategic briefings), Partnership Forge, Crew Terminal, and full User Management.',
+      tags: ['Gemini AI', 'React', 'TypeScript', 'Firebase', 'Vite', 'Real-time Analytics'],
+      github: 'https://github.com/dinoleix/Neko-Metric-version-3.3',
+      demo: 'https://neko-metric-version-3-3.vercel.app/',
+      cover: null,
+      screenshots: []
+    },
+    { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',                                                                      tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',     demo: null, cover: null, screenshots: [] },
+    { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',                                                     tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',          demo: null, cover: null, screenshots: [] },
+    { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.',                                               tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/dinoleix/llm-fine-tuner',            demo: null, cover: null, screenshots: [] }
   ],
   contact: { linkedin: 'https://linkedin.com/in/yourprofile', github: 'https://github.com/yourusername', email: 'you@email.com' }
 };
@@ -128,7 +138,8 @@ function renderProjects(projects) {
           <div class="card-body">
             <div class="card-tags">${proj.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
             <h3 class="card-title">${esc(proj.title)}</h3>
-            <p class="card-desc">${esc(proj.desc)}</p>
+            <div class="card-desc">${proj.desc.split('\n\n').map(p => `<p>${esc(p)}</p>`).join('')}</div>
+            ${featured && proj.desc.length > 200 ? `<button class="btn-read-more" onclick="toggleFeaturedDesc(${idx})">Read more ↓</button>` : ''}
             <div class="card-screenshots" id="screenshots-${idx}">
               ${screenshots.map(s => `
                 <div class="card-screenshot-img" onclick="openLightbox('${s.src.replace(/'/g,"\\'")}','${esc(s.caption)}')">
@@ -139,8 +150,13 @@ function renderProjects(projects) {
             <div class="card-footer">
               <a href="${proj.github}" class="btn-link" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-                View Source
+                Source Code
               </a>
+              ${proj.demo ? `
+              <a href="${proj.demo}" class="btn-link btn-link-demo" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>` : ''}
               ${screenshots.length ? `
               <button class="btn-expand" onclick="toggleScreenshots(${idx})">
                 Infographics
@@ -173,6 +189,15 @@ const hamburger = document.getElementById('hamburger');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
 hamburger.addEventListener('click', () => nav.classList.toggle('menu-open'));
 document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => nav.classList.remove('menu-open')));
+
+// FEATURED DESC EXPAND
+function toggleFeaturedDesc(idx) {
+  const desc = document.querySelector(`[data-index="${idx}"] .card-desc`);
+  const btn  = document.querySelector(`[data-index="${idx}"] .btn-read-more`);
+  if (!desc) return;
+  desc.classList.toggle('expanded');
+  if (btn) btn.textContent = desc.classList.contains('expanded') ? 'Show less ↑' : 'Read more ↓';
+}
 
 // SCREENSHOTS TOGGLE
 function toggleScreenshots(index) {

@@ -18,12 +18,22 @@ const DEFAULT_DATA = {
     { value: 500, label: 'GitHub Stars' },
     { value: 8, label: 'Technologies' }
   ],
-  techStack: ['Python', 'LangChain', 'OpenAI API', 'Anthropic Claude', 'RAG', 'Vector DBs', 'FastAPI', 'React', 'Docker', 'AWS'],
+  techStack: ['React', 'TypeScript', 'Google Gemini AI', 'Firebase', 'Vite', 'Python', 'LangChain', 'OpenAI API', 'Anthropic Claude', 'RAG', 'FastAPI', 'Docker'],
   projects: [
-    { id: 'p1', featured: true,  title: 'AI Knowledge Assistant',   desc: 'An enterprise-grade RAG system that lets teams query internal documents using natural language. Built with LangChain, ChromaDB, and Claude API — reduces support ticket volume by surfacing answers instantly.', tags: ['LLM', 'RAG', 'Python'],           github: 'https://github.com/yourusername/ai-knowledge-assistant', cover: null, screenshots: [] },
-    { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',                                                           tags: ['Agents', 'Automation', 'API'],    github: 'https://github.com/yourusername/autonomous-it-agent',      cover: null, screenshots: [] },
-    { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',                                            tags: ['NLP', 'Dashboard', 'React'],     github: 'https://github.com/yourusername/ai-briefing-bot',          cover: null, screenshots: [] },
-    { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.',                                        tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/yourusername/llm-fine-tuner',            cover: null, screenshots: [] }
+    {
+      id: 'neko-metrics',
+      featured: true,
+      title: 'Neko Metrics — AI Business Intelligence Platform',
+      desc: 'A production-grade, AI-augmented Business Intelligence platform built from scratch to manage a multi-outlet restaurant chain. Replaces spreadsheets with a real-time Gemini-AI-powered intelligence layer — giving executives, operations managers, and crew a single source of truth for every financial and operational decision.\n\nThe AI core (Google Gemini) generates on-demand strategic diagnostic reports in the Margin Intelligence module — analysing revenue quality, cost structure, and efficiency signals across all active outlets. A custom Projection Engine forecasts revenue trajectories from historical velocity data. Firebase powers real-time sync and multi-user auth. Weather data is integrated contextually to correlate footfall with environmental conditions.\n\nKey modules: CEO Dashboard (global KPIs + outlet yield rankings), Sales Intelligence (velocity, trajectory, day-part & AI projections), P&L Command (settled revenue vs. operational burn + profit waterfall), Expense Radar (COGS + outflow reconciliation), Waste Radar v2 (material reconciliation & relational drift analysis), Margin Intelligence (AI-generated strategic briefings), Partnership Forge, Crew Terminal, and full User Management.',
+      tags: ['Gemini AI', 'React', 'TypeScript', 'Firebase', 'Vite', 'Real-time Analytics'],
+      github: 'https://github.com/dinoleix/Neko-Metric-version-3.3',
+      demo: 'https://neko-metric-version-3-3.vercel.app/',
+      cover: null,
+      screenshots: []
+    },
+    { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',           tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',  demo: null, cover: null, screenshots: [] },
+    { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',       tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',       demo: null, cover: null, screenshots: [] },
+    { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.', tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/dinoleix/llm-fine-tuner',         demo: null, cover: null, screenshots: [] }
   ],
   contact: { linkedin: 'https://linkedin.com/in/yourprofile', github: 'https://github.com/yourusername', email: 'you@email.com' }
 };

@@ -113,6 +113,7 @@ document.querySelectorAll('.sidebar-btn').forEach(btn => {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    if (btn.dataset.tab === 'files') renderFilesTab(currentData);
   });
 });
 
@@ -178,6 +179,7 @@ function initAdmin() {
   renderStatsTab(currentData);
   renderTechTab(currentData);
   renderContactTab(currentData);
+  renderFilesTab(currentData);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -632,4 +634,154 @@ function readFileAsBase64(file, callback) {
   const reader = new FileReader();
   reader.onload = e => callback(e.target.result);
   reader.readAsDataURL(file);
+}
+
+/* ═══════════════════════════════════════════════════
+   FILES TAB
+═══════════════════════════════════════════════════ */
+function renderFilesTab(data) {
+  renderFileTree();
+  renderStorageMeter(data);
+  renderAssetsGrid(data);
+}
+
+function renderFileTree() {
+  const tree = [
+    { type: 'folder', name: 'portfolio/', open: true, children: [
+      { type: 'file', name: 'index.html',  desc: 'Portfolio homepage',      icon: 'html' },
+      { type: 'file', name: 'styles.css',  desc: 'Main stylesheet',         icon: 'css'  },
+      { type: 'file', name: 'app.js',      desc: 'Portfolio logic & data',  icon: 'js'   },
+      { type: 'file', name: 'admin.html',  desc: 'Admin panel UI',          icon: 'html' },
+      { type: 'file', name: 'admin.css',   desc: 'Admin panel styles',      icon: 'css'  },
+      { type: 'file', name: 'admin.js',    desc: 'Admin panel logic',       icon: 'js'   },
+      { type: 'folder', name: 'assets/', open: true, children: [
+        { type: 'folder', name: 'screenshots/', open: true, children: [
+          { type: 'file', name: 'neko-ceo-dashboard.png',      desc: 'Neko Metrics – CEO Dashboard',       icon: 'img' },
+          { type: 'file', name: 'neko-sales-intelligence.png', desc: 'Neko Metrics – Sales Intelligence',  icon: 'img' },
+        ]},
+        { type: 'folder', name: 'projects/', open: false, children: [] },
+      ]},
+    ]}
+  ];
+
+  const iconMap = {
+    html: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#e34c26" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+    css:  '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#264de4" stroke-width="2"><path d="M4 4l1.5 15L12 21l6.5-2L20 4H4z"/></svg>',
+    js:   '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f7df1e" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17c0 1 .5 2 2 2s2-1 2-3v-6"/></svg>',
+    img:  '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+    folder: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7c6fcd" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>',
+  };
+
+  function buildNodes(nodes, depth) {
+    return nodes.map(node => {
+      if (node.type === 'folder') {
+        const childrenHtml = node.children.length
+          ? `<div class="ft-children" ${node.open ? '' : 'style="display:none"'}>${buildNodes(node.children, depth + 1)}</div>`
+          : `<div class="ft-children ft-empty">— empty —</div>`;
+        return `
+          <div class="ft-folder" style="--depth:${depth}">
+            <div class="ft-row ft-folder-row" onclick="this.parentElement.querySelector('.ft-children').style.display = this.parentElement.querySelector('.ft-children').style.display==='none' ? '' : 'none'; this.querySelector('.ft-caret').style.transform = this.parentElement.querySelector('.ft-children').style.display==='' ? 'rotate(90deg)' : ''">
+              <span class="ft-caret" style="transform:${node.open ? 'rotate(90deg)' : ''}">&#9658;</span>
+              ${iconMap.folder}
+              <span class="ft-name">${node.name}</span>
+            </div>
+            ${childrenHtml}
+          </div>`;
+      } else {
+        return `
+          <div class="ft-file" style="--depth:${depth}">
+            <div class="ft-row">
+              <span class="ft-caret-spacer"></span>
+              ${iconMap[node.icon] || iconMap.js}
+              <span class="ft-name">${node.name}</span>
+              <span class="ft-desc">${node.desc}</span>
+            </div>
+          </div>`;
+      }
+    }).join('');
+  }
+
+  document.getElementById('fileTree').innerHTML = buildNodes(tree, 0);
+}
+
+function renderStorageMeter(data) {
+  const raw = localStorage.getItem('portfolioData') || '{}';
+  const used = new Blob([raw]).size;
+  const max  = 5 * 1024 * 1024; // 5 MB typical localStorage limit
+  const pct  = Math.min((used / max) * 100, 100).toFixed(1);
+
+  document.getElementById('storageBarFill').style.width = pct + '%';
+  document.getElementById('storageBarFill').style.background =
+    pct > 80 ? '#ef4444' : pct > 50 ? '#f59e0b' : '#7c6fcd';
+  document.getElementById('storageLabel').textContent =
+    `${formatBytes(used)} used of ~5 MB (${pct}%)`;
+
+  // Breakdown
+  let photoSize = 0, coverSize = 0, ssSize = 0;
+  if (data.profile && data.profile.photo && data.profile.photo.startsWith('data:')) photoSize = new Blob([data.profile.photo]).size;
+  (data.projects || []).forEach(p => {
+    if (p.cover && p.cover.startsWith('data:')) coverSize += new Blob([p.cover]).size;
+    (p.screenshots || []).forEach(s => {
+      if (s.url && s.url.startsWith('data:')) ssSize += new Blob([s.url]).size;
+    });
+  });
+  const metaSize = used - photoSize - coverSize - ssSize;
+  document.getElementById('storageBreakdown').textContent =
+    `Profile photo: ${formatBytes(photoSize)}  |  Project covers: ${formatBytes(coverSize)}  |  Screenshots: ${formatBytes(ssSize)}  |  Other data: ${formatBytes(metaSize)}`;
+}
+
+function formatBytes(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1024 * 1024) return (b / 1024).toFixed(1) + ' KB';
+  return (b / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+function renderAssetsGrid(data) {
+  const assets = [];
+
+  // Profile photo
+  if (data.profile && data.profile.photo) {
+    assets.push({ url: data.profile.photo, label: 'Profile Photo', tag: 'Profile' });
+  }
+
+  // Project covers + screenshots
+  (data.projects || []).forEach(p => {
+    if (p.cover) assets.push({ url: p.cover, label: p.title, tag: 'Cover' });
+    (p.screenshots || []).forEach((s, i) => {
+      assets.push({ url: s.url || s.src || '', label: s.caption || `${p.title} screenshot ${i + 1}`, tag: 'Screenshot' });
+    });
+  });
+
+  const grid = document.getElementById('assetsGrid');
+  if (!assets.length) {
+    grid.innerHTML = '<p class="field-hint" style="padding:12px 0">No assets uploaded yet. Upload images in the Profile or Projects tabs.</p>';
+    return;
+  }
+
+  grid.innerHTML = assets.map((a, i) => `
+    <div class="asset-card">
+      <div class="asset-thumb">
+        <img src="${a.url}" alt="${esc(a.label)}" onerror="this.parentElement.innerHTML='<span class=\\'asset-broken\\'>?</span>'" />
+      </div>
+      <div class="asset-info">
+        <div class="asset-tag">${a.tag}</div>
+        <div class="asset-name">${esc(a.label)}</div>
+      </div>
+      <button class="asset-dl-btn" onclick="downloadAsset(${i})" title="Download">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+    </div>
+  `).join('');
+
+  // Store for download handler
+  window._assetsCache = assets;
+}
+
+function downloadAsset(i) {
+  const a = (window._assetsCache || [])[i];
+  if (!a) return;
+  const link = document.createElement('a');
+  link.href = a.url;
+  link.download = a.label.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.png';
+  link.click();
 }

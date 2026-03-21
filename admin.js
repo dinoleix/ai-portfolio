@@ -341,7 +341,7 @@ function renderProjectsTab(data) {
     list.innerHTML = '<p style="color:var(--text-faint);font-size:0.85rem;text-align:center;padding:32px">No projects yet. Add your first one!</p>';
     return;
   }
-  list.innerHTML = data.projects.map(proj => `
+  list.innerHTML = data.projects.map((proj, idx) => `
     <div class="project-admin-card" data-id="${proj.id}">
       <div class="proj-thumb">
         ${proj.cover
@@ -351,9 +351,13 @@ function renderProjectsTab(data) {
       </div>
       <div class="proj-info">
         <div class="proj-info-title">${esc(proj.title)}</div>
-        <div class="proj-info-tags">${proj.tags.join(' · ')}</div>
+        <div class="proj-info-tags">${(proj.tags || []).join(' · ')}${proj.demo ? ' · <span style="color:var(--success);font-size:0.72rem">Live Demo</span>' : ''}</div>
       </div>
       ${proj.featured ? '<span class="proj-featured-badge">Featured</span>' : ''}
+      <div class="proj-reorder">
+        <button class="btn-reorder" title="Move up"   onclick="moveProject(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}>▲</button>
+        <button class="btn-reorder" title="Move down" onclick="moveProject(${idx},  1)" ${idx === data.projects.length - 1 ? 'disabled' : ''}>▼</button>
+      </div>
       <div class="proj-actions">
         <button class="btn-ghost-sm" onclick="openProjectModal('${proj.id}')">Edit</button>
         <button class="btn-danger-sm" onclick="deleteProject('${proj.id}')">Delete</button>
@@ -368,6 +372,18 @@ function deleteProject(id) {
   if (!confirm('Delete this project?')) return;
   currentData.projects = currentData.projects.filter(p => p.id !== id);
   renderProjectsTab(currentData);
+  saveStatus.textContent = 'Unsaved changes';
+  saveStatus.style.color = '#f59e0b';
+}
+
+function moveProject(idx, dir) {
+  const arr = currentData.projects;
+  const newIdx = idx + dir;
+  if (newIdx < 0 || newIdx >= arr.length) return;
+  [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+  renderProjectsTab(currentData);
+  saveStatus.textContent = 'Unsaved changes';
+  saveStatus.style.color = '#f59e0b';
 }
 
 /* ═══════════════════════════════════════════════════
@@ -392,6 +408,7 @@ function openProjectModal(id) {
   set('projTitle', '');
   set('projDesc', '');
   set('projGithub', '');
+  set('projDemo', '');
   document.getElementById('projFeatured').checked = false;
   document.getElementById('projTagChips').innerHTML = '';
   resetCoverPreview();
@@ -406,10 +423,15 @@ function openProjectModal(id) {
     set('projTitle',   proj.title);
     set('projDesc',    proj.desc);
     set('projGithub',  proj.github);
+    set('projDemo',    proj.demo || '');
     document.getElementById('projFeatured').checked = proj.featured;
     proj.tags.forEach(tag => addChip('projTagChips', tag, removeProjTag));
     if (proj.cover) showCoverPreview(proj.cover);
-    modalScreenshots = proj.screenshots ? [...proj.screenshots.map(s => ({...s}))] : [];
+    // Normalize screenshots: support both {url} and legacy {src} keys
+    modalScreenshots = (proj.screenshots || []).map(s => ({
+      url:     s.url || s.src || '',
+      caption: s.caption || ''
+    }));
     renderModalScreenshots();
   } else {
     modalTitle.textContent = 'Add New Project';
@@ -467,7 +489,7 @@ document.getElementById('screenshotFileInput').addEventListener('change', e => {
   let loaded = 0;
   files.forEach(file => {
     readFileAsBase64(file, base64 => {
-      modalScreenshots.push({ src: base64, caption: file.name.replace(/\.[^.]+$/, '') });
+      modalScreenshots.push({ url: base64, caption: file.name.replace(/\.[^.]+$/, '') });
       loaded++;
       if (loaded === files.length) renderModalScreenshots();
     });
@@ -479,7 +501,7 @@ function renderModalScreenshots() {
   const list = document.getElementById('screenshotsList');
   list.innerHTML = modalScreenshots.map((s, i) => `
     <div class="screenshot-admin-item">
-      <img src="${s.src}" alt="" />
+      <img src="${s.url || s.src || ''}" alt="" />
       <div class="screenshot-admin-caption">
         <input type="text" value="${esc(s.caption)}" placeholder="Caption (optional)"
           onchange="modalScreenshots[${i}].caption = this.value" />
@@ -515,8 +537,9 @@ modalSaveBtn.addEventListener('click', () => {
     desc:        v('projDesc'),
     tags,
     github:      v('projGithub'),
+    demo:        v('projDemo').trim() || null,
     cover,
-    screenshots: modalScreenshots.map(s => ({ src: s.src, caption: s.caption }))
+    screenshots: modalScreenshots.map(s => ({ url: s.url || s.src || '', caption: s.caption }))
   };
 
   if (editingProjectId) {

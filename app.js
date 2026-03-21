@@ -144,11 +144,13 @@ function renderProjects(projects) {
             <div class="card-desc">${proj.desc.split('\n\n').map(p => `<p>${esc(p)}</p>`).join('')}</div>
             ${featured && proj.desc.length > 200 ? `<button class="btn-read-more" onclick="toggleFeaturedDesc(${idx})">Read more ↓</button>` : ''}
             <div class="card-screenshots" id="screenshots-${idx}">
-              ${screenshots.map(s => `
-                <div class="card-screenshot-img" onclick="openLightbox('${s.src.replace(/'/g,"\\'")}','${esc(s.caption)}')">
-                  <img src="${s.src}" alt="${esc(s.caption)}" loading="lazy" />
-                </div>
-              `).join('')}
+              ${screenshots.map(s => {
+                const imgSrc = s.url || s.src || '';
+                return `
+                <div class="card-screenshot-img" onclick="openLightbox('${imgSrc.replace(/'/g,"\\'")}','${esc(s.caption)}')">
+                  <img src="${imgSrc}" alt="${esc(s.caption)}" loading="lazy" />
+                </div>`;
+              }).join('')}
             </div>
             <div class="card-footer">
               <a href="${proj.github}" class="btn-link" target="_blank" rel="noopener">

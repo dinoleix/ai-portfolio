@@ -28,8 +28,11 @@ const DEFAULT_DATA = {
       tags: ['Gemini AI', 'React', 'TypeScript', 'Firebase', 'Vite', 'Real-time Analytics'],
       github: 'https://github.com/dinoleix/Neko-Metric-version-3.3',
       demo: 'https://neko-metric-version-3-3.vercel.app/',
-      cover: null,
-      screenshots: []
+      cover: 'assets/screenshots/neko-ceo-dashboard.png',
+      screenshots: [
+        { url: 'assets/screenshots/neko-ceo-dashboard.png', caption: 'CEO Dashboard — Real-time KPIs: Global Revenue ₹9,73,582 · Recommended Net Profit ₹1,13,123 · Group Net Margin 11.6% · Outlet Yield Rankings' },
+        { url: 'assets/screenshots/neko-sales-intelligence.png', caption: 'Sales Intelligence — Multi-month Performance: POS Revenue ₹9,350,645 · Outlet Velocity Comparison · Trajectory & Projections views' }
+      ]
     },
     { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',           tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',  demo: null, cover: null, screenshots: [] },
     { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',       tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',       demo: null, cover: null, screenshots: [] },

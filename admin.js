@@ -34,6 +34,19 @@ const DEFAULT_DATA = {
         { url: 'assets/screenshots/neko-sales-intelligence.png', caption: 'Sales Intelligence — Multi-month Performance: POS Revenue ₹9,350,645 · Outlet Velocity Comparison · Trajectory & Projections views' }
       ]
     },
+    {
+      id: 'rag-knowledge-base',
+      featured: true,
+      title: 'RAG Knowledge Base',
+      desc: 'A production-ready Retrieval-Augmented Generation app that lets you upload documents (PDF, TXT, MD) and ask questions against them — getting grounded answers with full source citations.\n\nDocuments are chunked and embedded via gemini-embedding-001, with vectors stored in ChromaDB using cosine similarity. At query time, the top-k relevant chunks are retrieved and fed exclusively to Gemini 2.5 Flash, ensuring answers stay grounded in the uploaded content. The FastAPI backend handles document ingestion and retrieval, while the clean dark-mode UI provides suggested starter prompts and a real-time chat interface.',
+      tags: ['RAG', 'Gemini AI', 'ChromaDB', 'FastAPI', 'Python'],
+      github: null,
+      demo: 'https://rag-knowledge-base-one.vercel.app/',
+      cover: 'assets/screenshots/rag-knowledge-base.jpeg',
+      screenshots: [
+        { url: 'assets/screenshots/rag-knowledge-base.jpeg', caption: 'RAG Knowledge Base — Upload documents and ask questions with grounded answers and source citations powered by Gemini 2.5 Flash + ChromaDB' }
+      ]
+    },
     { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',           tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',  demo: null, cover: null, screenshots: [] },
     { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',       tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',       demo: null, cover: null, screenshots: [] },
     { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.', tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/dinoleix/llm-fine-tuner',         demo: null, cover: null, screenshots: [] }

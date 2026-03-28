@@ -57,7 +57,16 @@ const DEFAULT_DATA = {
 function getPortfolioData() {
   try {
     const raw = localStorage.getItem('portfolioData');
-    return raw ? JSON.parse(raw) : DEFAULT_DATA;
+    if (!raw) return DEFAULT_DATA;
+    const stored = JSON.parse(raw);
+    // Merge any new projects from DEFAULT_DATA that aren't in localStorage yet
+    const storedIds = new Set((stored.projects || []).map(p => p.id));
+    const newProjects = DEFAULT_DATA.projects.filter(p => !storedIds.has(p.id));
+    if (newProjects.length) {
+      stored.projects = [...newProjects, ...(stored.projects || [])];
+      localStorage.setItem('portfolioData', JSON.stringify(stored));
+    }
+    return stored;
   } catch { return DEFAULT_DATA; }
 }
 

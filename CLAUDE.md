@@ -63,3 +63,15 @@ Images (profile photo, project covers, screenshots) are stored as **Base64 data 
 - CSS uses custom properties (variables) defined on `:root` for the color palette; primary accents are `#3d6cff`, `#7c3aed`, `#06b6d4`
 - All dynamic HTML must go through `esc()` for text content to avoid XSS
 - The repo deploys as a static site (GitHub Pages / any static host) — keep it dependency-free
+
+## Deployment
+
+- **GitHub repo**: `https://github.com/dinoleix/ai-portfolio`
+- **Hosting**: User has a **Vercel account** — deploy via Vercel dashboard (import from GitHub) or `npx vercel` CLI. No build command needed, output directory is `/` (root).
+- Static site — no server, no build step, just connect repo and deploy.
+
+## User Setup & Preferences
+
+- Uses **Google Gemini API** (free tier) for AI tools — currently `gemini-2.5-flash` model
+- Has a Vercel account for deployment
+- Portfolio GitHub repo: `dinoleix/ai-portfolio`

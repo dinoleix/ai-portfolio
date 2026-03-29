@@ -74,5 +74,54 @@ Images (profile photo, project covers, screenshots) are stored as **Base64 data 
 ## User Setup & Preferences
 
 - Uses **Google Gemini API** (free tier) for AI tools — currently `gemini-2.5-flash` model
-- Has a Vercel account for deployment
+- Has a Vercel account for deployment (already connected to GitHub repo, auto-deploys on push)
 - Portfolio GitHub repo: `dinoleix/ai-portfolio`
+- Does NOT have an Anthropic API key yet (plans to buy later) — default to Gemini for all AI tools
+- Prefers vanilla HTML/CSS/JS — no frameworks, no build tools
+
+## Projects Built This Session
+
+### Resume / JD Matcher (`resume-matcher.html`)
+A fully working AI tool built across two phases:
+
+**Files:**
+- `resume-matcher.html` — two-column input layout, API key bar, provider toggle, results panel
+- `resume-matcher.css` — dark-theme styling matching portfolio design system
+- `resume-matcher.js` — pdf.js text extraction, Gemini/Claude API fetch, JSON parsing, UI rendering
+
+**Key decisions made:**
+- PDF parsing via `pdf.js` CDN (no backend needed)
+- Dual provider toggle: **Gemini** (default, free) ↔ **Claude** (when user buys a key)
+- Model: `gemini-2.5-flash` — confirmed working; `gemini-2.0-flash` had exhausted daily quota on the test key
+- `maxOutputTokens: 8192` — 2048 caused JSON truncation in Gemini 2.5-flash responses
+- Gemini wraps JSON in ` ```json ``` ` fences — `parseAIJson()` strips these before parsing
+- API key stored per-provider in `sessionStorage` (`rm_key_gemini`, `rm_key_claude`)
+- `anthropic-dangerous-direct-browser-access: true` header required for browser → Claude API calls
+
+**Live demo:** `https://ai-portfolio-wheat-six.vercel.app/resume-matcher.html`
+
+**Added as featured project** in `DEFAULT_DATA` in both `app.js` and `admin.js` with id `resume-jd-matcher`
+
+**Git commits (in order):**
+- `d313fb1` — Initial Phase 1 + 2 (HTML/CSS/JS)
+- `e2c3562` — Gemini provider toggle, gemini-2.5-flash, maxOutputTokens fix
+- `644fa50` — Added Vercel live URLs to CLAUDE.md
+- `f1a34e0` — Added Resume Matcher to project listings in app.js + admin.js
+
+## AI Projects Roadmap (suggested to user)
+
+1. ✅ RAG Knowledge Base (already built)
+2. ✅ Resume / JD Matcher (built this session)
+3. 🔜 AI Meeting Summarizer — audio/transcript → structured summary + action items
+4. 🔜 Persona Chatbot Builder — no-code tool to create custom chatbots
+5. 🔜 AI-Powered SQL Generator — natural language → SQL
+6. 🔜 Voice-Controlled Portfolio — voice assistant that answers recruiter questions
+
+## Gemini API Notes
+
+- Free tier model that works: `gemini-2.5-flash`
+- `gemini-2.0-flash` had `limit: 0` daily quota exhausted on the test key
+- `gemini-1.5-flash` not available on v1beta endpoint (404)
+- Always use `v1beta` endpoint: `https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}`
+- API key goes as query param (not header) for Gemini
+- Set `maxOutputTokens: 8192` minimum to avoid truncation on complex JSON responses

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume / JD Matcher — AI Tool</title>
+  <link rel="stylesheet" href="resume-matcher.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- pdf.js from CDN — parses PDF files in the browser, no server needed -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>AI<span class="logo-accent">Director</span><span class="logo-bracket">/&gt;</span>
+      </a>
+      <span class="nav-tag">Resume Matcher</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">AI-Powered Tool</div>
+      <h1>Resume <span class="gradient-text">/ JD Matcher</span></h1>
+      <p class="hero-sub">
+        Upload your resume and paste a job description. Get an instant match score,
+        skill gap analysis, and actionable suggestions.
+      </p>
+    </div>
+  </section>
+
+  <!-- API KEY BANNER -->
+  <div class="api-key-bar" id="api-key-bar">
+    <div class="api-key-bar-inner">
+      <span class="api-key-bar-icon">🔑</span>
+      <div class="api-key-bar-text">
+        <strong>Your Anthropic API Key</strong>
+        <span class="api-key-bar-sub">Stored only in your browser session · Never sent to any server · <a href="https://console.anthropic.com" target="_blank" rel="noopener">Get a key →</a></span>
+      </div>
+      <div class="api-key-input-wrap">
+        <input
+          type="password"
+          id="api-key-input"
+          class="api-key-input"
+          placeholder="sk-ant-..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="btn-key-save" id="btn-key-save">Save</button>
+      </div>
+      <div class="api-key-saved hidden" id="api-key-saved">
+        <span class="key-saved-dot"></span> Key saved
+        <button class="btn-key-clear" id="btn-key-clear">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN TOOL -->
+  <main class="tool-container">
+
+    <!-- INPUT PANEL -->
+    <div class="input-panel">
+
+      <!-- LEFT: Resume upload -->
+      <div class="input-card" id="resume-card">
+        <div class="input-card-header">
+          <div class="input-icon">📄</div>
+          <div>
+            <h2>Your Resume</h2>
+            <p class="input-hint">Upload a PDF or paste plain text</p>
+          </div>
+        </div>
+
+        <!-- Drop zone -->
+        <div class="drop-zone" id="drop-zone">
+          <div class="drop-icon">⬆</div>
+          <p class="drop-label">Drag & drop your PDF here</p>
+          <p class="drop-sub">or</p>
+          <label class="btn-upload" for="pdf-input">Browse file</label>
+          <input type="file" id="pdf-input" accept=".pdf" hidden />
+        </div>
+
+        <!-- File status (shown after upload) -->
+        <div class="file-status hidden" id="file-status">
+          <span class="file-icon">✓</span>
+          <span class="file-name" id="file-name"></span>
+          <button class="btn-remove" id="btn-remove-file" title="Remove">✕</button>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"><span>or paste text</span></div>
+
+        <!-- Text fallback -->
+        <textarea
+          id="resume-text"
+          class="textarea"
+          placeholder="Paste your resume text here..."
+          rows="8"
+        ></textarea>
+
+        <!-- Character count -->
+        <div class="char-count" id="resume-char-count">0 characters</div>
+      </div>
+
+      <!-- RIGHT: Job Description -->
+      <div class="input-card" id="jd-card">
+        <div class="input-card-header">
+          <div class="input-icon">💼</div>
+          <div>
+            <h2>Job Description</h2>
+            <p class="input-hint">Paste the full job posting</p>
+          </div>
+        </div>
+
+        <textarea
+          id="jd-text"
+          class="textarea jd-textarea"
+          placeholder="Paste the job description here...&#10;&#10;Include the full posting — responsibilities, requirements, nice-to-haves. The more context the AI has, the better the analysis."
+          rows="16"
+        ></textarea>
+
+        <div class="char-count" id="jd-char-count">0 characters</div>
+      </div>
+    </div>
+
+    <!-- ANALYZE BUTTON -->
+    <div class="analyze-row">
+      <button class="btn-analyze" id="btn-analyze" disabled>
+        <span class="btn-analyze-icon">⚡</span>
+        Analyze Match
+      </button>
+      <p class="analyze-hint" id="analyze-hint">Add your resume and a job description to get started</p>
+    </div>
+
+    <!-- RESULTS PANEL (hidden until analysis) -->
+    <div class="results-panel hidden" id="results-panel">
+
+      <!-- Score card -->
+      <div class="score-card">
+        <div class="score-label">Match Score</div>
+        <div class="score-gauge">
+          <svg class="gauge-svg" viewBox="0 0 120 70">
+            <!-- Background arc -->
+            <path class="gauge-bg" d="M 10 65 A 50 50 0 0 1 110 65" />
+            <!-- Foreground arc (animated via JS) -->
+            <path class="gauge-fill" id="gauge-fill" d="M 10 65 A 50 50 0 0 1 110 65" />
+          </svg>
+          <div class="score-number" id="score-number">—</div>
+          <div class="score-pct">%</div>
+        </div>
+        <div class="score-verdict" id="score-verdict"></div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="breakdown-grid">
+
+        <!-- Matched skills -->
+        <div class="breakdown-card matched">
+          <h3><span class="bk-icon">✓</span> Matched Skills</h3>
+          <div class="chip-list" id="matched-chips"></div>
+        </div>
+
+        <!-- Missing skills -->
+        <div class="breakdown-card missing">
+          <h3><span class="bk-icon">✗</span> Missing / Weak</h3>
+          <div class="chip-list" id="missing-chips"></div>
+        </div>
+
+      </div>
+
+      <!-- Suggestions -->
+      <div class="suggestions-card">
+        <h3>Suggestions to Improve Your Resume</h3>
+        <ul class="suggestions-list" id="suggestions-list"></ul>
+      </div>
+
+    </div>
+
+    <!-- LOADING STATE -->
+    <div class="loading-panel hidden" id="loading-panel">
+      <div class="spinner"></div>
+      <p class="loading-text">Analyzing your resume against the job description...</p>
+      <p class="loading-sub">This usually takes 5–10 seconds</p>
+    </div>
+
+    <!-- ERROR STATE -->
+    <div class="error-panel hidden" id="error-panel">
+      <div class="error-icon">⚠</div>
+      <p class="error-msg" id="error-msg"></p>
+      <button class="btn-retry" id="btn-retry">Try Again</button>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>Built with Claude API · No data stored · Runs entirely in your browser</p>
+  </footer>
+
+  <script src="resume-matcher.js"></script>
+</body>
+</html>

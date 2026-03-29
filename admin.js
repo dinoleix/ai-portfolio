@@ -55,8 +55,10 @@ const DEFAULT_DATA = {
       tags: ['Gemini AI', 'JavaScript', 'pdf.js', 'AI Tool', 'No-Backend'],
       github: 'https://github.com/dinoleix/ai-portfolio',
       demo: 'https://ai-portfolio-wheat-six.vercel.app/resume-matcher.html',
-      cover: null,
-      screenshots: []
+      cover: 'assets/screenshots/resume-matcher.png',
+      screenshots: [
+        { url: 'assets/screenshots/resume-matcher.png', caption: 'Resume / JD Matcher — AI-powered match score, skill gap analysis, and actionable resume suggestions powered by Gemini 2.5 Flash' }
+      ]
     },
     { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',           tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',  demo: null, cover: null, screenshots: [] },
     { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',       tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',       demo: null, cover: null, screenshots: [] },

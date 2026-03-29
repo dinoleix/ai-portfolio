@@ -68,8 +68,10 @@ const DEFAULT_DATA = {
       tags: ['Web Design', 'HTML/CSS/JS', 'Restaurant', 'Responsive'],
       github: 'https://github.com/dinoleix/Eatpham',
       demo: 'https://eatpham.vercel.app/',
-      cover: null,
-      screenshots: []
+      cover: 'assets/screenshots/eatpham.png',
+      screenshots: [
+        { url: 'assets/screenshots/eatpham.png', caption: 'Eatpham — Authentic Manipuri cuisine restaurant website with interactive menu, gallery, and reservations' }
+      ]
     },
     { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',                                                                      tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',     demo: null, cover: null, screenshots: [] },
     { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',                                                     tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',          demo: null, cover: null, screenshots: [] },

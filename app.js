@@ -75,7 +75,7 @@ const DEFAULT_DATA = {
     { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',                                                     tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',          demo: null, cover: null, screenshots: [] },
     { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.',                                               tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/dinoleix/llm-fine-tuner',            demo: null, cover: null, screenshots: [] }
   ],
-  contact: { linkedin: 'https://linkedin.com/in/yourprofile', github: 'https://github.com/yourusername', email: 'you@email.com' }
+  contact: { linkedin: 'https://fr.linkedin.com/in/dinoleishangthem', github: 'https://github.com/dinoleix', email: 'dino.leix@gmail.com' }
 };
 
 function getPortfolioData() {

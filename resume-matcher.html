@@ -37,17 +37,31 @@
   <!-- API KEY BANNER -->
   <div class="api-key-bar" id="api-key-bar">
     <div class="api-key-bar-inner">
+
+      <!-- Provider toggle -->
+      <div class="provider-toggle">
+        <button class="btn-provider" id="btn-provider-gemini" data-provider="gemini">
+          <span>✦</span> Gemini
+        </button>
+        <button class="btn-provider" id="btn-provider-claude" data-provider="claude">
+          <span>◆</span> Claude
+        </button>
+      </div>
+
       <span class="api-key-bar-icon">🔑</span>
       <div class="api-key-bar-text">
-        <strong>Your Anthropic API Key</strong>
-        <span class="api-key-bar-sub">Stored only in your browser session · Never sent to any server · <a href="https://console.anthropic.com" target="_blank" rel="noopener">Get a key →</a></span>
+        <strong id="key-label">API Key</strong>
+        <span class="api-key-bar-sub" id="key-sub">
+          Stored only in your browser session · Never sent to any server
+        </span>
       </div>
-      <div class="api-key-input-wrap">
+
+      <div class="api-key-input-wrap" id="api-key-input-wrap">
         <input
           type="password"
           id="api-key-input"
           class="api-key-input"
-          placeholder="sk-ant-..."
+          placeholder="AIza..."
           autocomplete="off"
           spellcheck="false"
         />
@@ -57,6 +71,7 @@
         <span class="key-saved-dot"></span> Key saved
         <button class="btn-key-clear" id="btn-key-clear">Clear</button>
       </div>
+
     </div>
   </div>
 

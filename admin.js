@@ -47,6 +47,17 @@ const DEFAULT_DATA = {
         { url: 'assets/screenshots/rag-knowledge-base.jpeg', caption: 'RAG Knowledge Base — Upload documents and ask questions with grounded answers and source citations powered by Gemini 2.5 Flash + ChromaDB' }
       ]
     },
+    {
+      id: 'resume-jd-matcher',
+      featured: true,
+      title: 'Resume / JD Matcher',
+      desc: 'An AI-powered browser tool that analyzes your resume against any job description — instantly returning a match score, matched skills, skill gaps, and specific suggestions to improve your resume for that role.\n\nBuilt entirely client-side with vanilla JavaScript and the Google Gemini API (gemini-2.5-flash). PDF resumes are parsed in the browser via pdf.js — no file ever leaves your device. Supports both Gemini and Claude as AI providers via a toggle. No backend, no database, no data stored anywhere.',
+      tags: ['Gemini AI', 'JavaScript', 'pdf.js', 'AI Tool', 'No-Backend'],
+      github: 'https://github.com/dinoleix/ai-portfolio',
+      demo: 'https://ai-portfolio-wheat-six.vercel.app/resume-matcher.html',
+      cover: null,
+      screenshots: []
+    },
     { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',           tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',  demo: null, cover: null, screenshots: [] },
     { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',       tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',       demo: null, cover: null, screenshots: [] },
     { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.', tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/dinoleix/llm-fine-tuner',         demo: null, cover: null, screenshots: [] }

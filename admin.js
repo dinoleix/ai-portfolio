@@ -60,6 +60,17 @@ const DEFAULT_DATA = {
         { url: 'assets/screenshots/resume-matcher.png', caption: 'Resume / JD Matcher — AI-powered match score, skill gap analysis, and actionable resume suggestions powered by Gemini 2.5 Flash' }
       ]
     },
+    {
+      id: 'eatpham',
+      featured: false,
+      title: 'Eatpham — Manipuri Restaurant Website',
+      desc: 'A fully custom restaurant website for Eatpham, an authentic Manipuri cuisine restaurant in Delhi (4.3★ on Google, 1,380+ reviews). Built with vanilla HTML/CSS/JS — no frameworks, no CMS.\n\nFeatures an interactive tabbed menu with pricing, photo gallery with lightbox, Google Maps integration, customer reviews section, and smooth scroll animations. Elegant design using deep jade greens, cream, and gold accents with Cormorant Garamond typography to reflect the restaurant\'s cultural identity and premium positioning.',
+      tags: ['Web Design', 'HTML/CSS/JS', 'Restaurant', 'Responsive'],
+      github: 'https://github.com/dinoleix/Eatpham',
+      demo: 'https://eatpham.vercel.app/',
+      cover: null,
+      screenshots: []
+    },
     { id: 'p2', featured: false, title: 'Autonomous IT Agent',       desc: 'An AI agent that autonomously monitors infrastructure, diagnoses anomalies, and drafts incident reports — cutting MTTD by 60% in test environments.',           tags: ['Agents', 'Automation', 'API'],      github: 'https://github.com/dinoleix/autonomous-it-agent',  demo: null, cover: null, screenshots: [] },
     { id: 'p3', featured: false, title: 'Executive AI Briefing Bot', desc: 'Aggregates news, internal reports, and market data — then generates concise executive briefings using LLMs. Delivered as a clean dashboard with weekly email digests.',       tags: ['NLP', 'Dashboard', 'React'],        github: 'https://github.com/dinoleix/ai-briefing-bot',       demo: null, cover: null, screenshots: [] },
     { id: 'p4', featured: false, title: 'Custom LLM Fine-Tuner',     desc: 'A pipeline for fine-tuning open-source LLMs on domain-specific datasets. Includes data prep, LoRA training, evaluation, and one-click model deployment to HuggingFace Hub.', tags: ['Fine-tuning', 'PyTorch', 'MLOps'], github: 'https://github.com/dinoleix/llm-fine-tuner',         demo: null, cover: null, screenshots: [] }

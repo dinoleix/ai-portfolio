@@ -9,7 +9,7 @@ const DEFAULT_DATA = {
     bio1: 'I lead enterprise IT strategy at scale — but what truly drives me is getting hands-on with the technology reshaping our world. I spend my nights and weekends building AI-powered tools, experimenting with large language models, and exploring what\'s possible at the frontier of machine intelligence.',
     bio2: 'My projects live at the intersection of practical utility and technical curiosity — tools that solve real problems, built with modern AI stacks.',
     status: 'Open to opportunities',
-    photo: null,
+    photo: 'assets/dino.jpeg',
     badges: ['Machine Learning', 'LLMs & Agents', 'Enterprise IT', 'AI Strategy']
   },
   stats: [

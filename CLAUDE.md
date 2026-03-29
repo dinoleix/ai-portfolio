@@ -67,8 +67,9 @@ Images (profile photo, project covers, screenshots) are stored as **Base64 data 
 ## Deployment
 
 - **GitHub repo**: `https://github.com/dinoleix/ai-portfolio`
-- **Hosting**: User has a **Vercel account** — deploy via Vercel dashboard (import from GitHub) or `npx vercel` CLI. No build command needed, output directory is `/` (root).
-- Static site — no server, no build step, just connect repo and deploy.
+- **Live site**: `https://ai-portfolio-wheat-six.vercel.app/`
+- **Resume Matcher**: `https://ai-portfolio-wheat-six.vercel.app/resume-matcher.html`
+- **Hosting**: Vercel (connected to GitHub, auto-deploys on every push to main). No build command, output directory is `/` (root).
 
 ## User Setup & Preferences
 

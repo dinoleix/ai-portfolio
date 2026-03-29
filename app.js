@@ -42,9 +42,9 @@ const DEFAULT_DATA = {
       tags: ['RAG', 'Gemini AI', 'ChromaDB', 'FastAPI', 'Python'],
       github: null,
       demo: 'https://rag-knowledge-base-one.vercel.app/',
-      cover: 'assets/screenshots/rag-knowledge-base.jpeg',
+      cover: 'assets/screenshots/rag-knowledge-base.png',
       screenshots: [
-        { url: 'assets/screenshots/rag-knowledge-base.jpeg', caption: 'RAG Knowledge Base — Upload documents and ask questions with grounded answers and source citations powered by Gemini 2.5 Flash + ChromaDB' }
+        { url: 'assets/screenshots/rag-knowledge-base.png', caption: 'RAG Knowledge Base — Upload documents and ask questions with grounded answers and source citations powered by Gemini 2.5 Flash + ChromaDB' }
       ]
     },
     {

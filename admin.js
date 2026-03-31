@@ -94,8 +94,11 @@ const DEFAULT_DATA = {
   contact: { linkedin: 'https://fr.linkedin.com/in/dinoleishangthem', github: 'https://github.com/dinoleix', email: 'dino.leix@gmail.com' }
 };
 
-const PASS_KEY = 'portfolioAdminPass';
-const DATA_KEY = 'portfolioData';
+const PASS_KEY    = 'portfolioAdminPass';
+const LOCKOUT_KEY = 'adminLockout';
+const DATA_KEY    = 'portfolioData';
+const MAX_ATTEMPTS   = 5;
+const LOCKOUT_MS     = 15 * 60 * 1000; // 15 minutes
 
 /* ═══════════════════════════════════════════════════
    DATA HELPERS
@@ -111,9 +114,30 @@ function saveData(data) {
   localStorage.setItem(DATA_KEY, JSON.stringify(data));
 }
 
-function getPassword() {
-  return localStorage.getItem(PASS_KEY) || 'admin123';
+/* SHA-256 via Web Crypto — returns 64-char hex string */
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
+
+async function getStoredHash() {
+  const stored = localStorage.getItem(PASS_KEY);
+  /* If stored value is a 64-char hex hash, use it. Otherwise it's a plain-text
+     legacy value — hash it now and migrate, falling back to hashing 'admin123'. */
+  if (stored && /^[0-9a-f]{64}$/.test(stored)) return stored;
+  const migrated = await sha256(stored || 'admin123');
+  localStorage.setItem(PASS_KEY, migrated);
+  return migrated;
+}
+
+/* ── Lockout helpers ── */
+function getLockout() {
+  try { return JSON.parse(localStorage.getItem(LOCKOUT_KEY)) || { attempts: 0, lockedUntil: 0 }; }
+  catch { return { attempts: 0, lockedUntil: 0 }; }
+}
+function saveLockout(obj) { localStorage.setItem(LOCKOUT_KEY, JSON.stringify(obj)); }
+function isLockedOut()    { return Date.now() < getLockout().lockedUntil; }
+function lockoutMinsLeft(){ return Math.ceil((getLockout().lockedUntil - Date.now()) / 60000); }
 
 /* ═══════════════════════════════════════════════════
    AUTH
@@ -137,16 +161,38 @@ function showLogin() {
   adminShell.style.display  = 'none';
 }
 
-loginForm.addEventListener('submit', e => {
+loginForm.addEventListener('submit', async e => {
   e.preventDefault();
-  const pw = document.getElementById('loginPassword').value;
-  if (pw === getPassword()) {
+
+  if (isLockedOut()) {
+    loginError.textContent = `Too many attempts. Try again in ${lockoutMinsLeft()} min.`;
+    return;
+  }
+
+  const pw   = document.getElementById('loginPassword').value;
+  const hash = await sha256(pw);
+  const stored = await getStoredHash();
+
+  if (hash === stored) {
+    saveLockout({ attempts: 0, lockedUntil: 0 });
     sessionStorage.setItem('adminLoggedIn', '1');
     loginError.textContent = '';
     showShell();
   } else {
-    loginError.textContent = 'Incorrect password. Try again.';
-    document.getElementById('loginPassword').select();
+    const lockout = getLockout();
+    lockout.attempts += 1;
+    const remaining = MAX_ATTEMPTS - lockout.attempts;
+    if (lockout.attempts >= MAX_ATTEMPTS) {
+      lockout.lockedUntil = Date.now() + LOCKOUT_MS;
+      lockout.attempts    = 0;
+      saveLockout(lockout);
+      loginError.textContent = `Too many failed attempts. Locked for 15 minutes.`;
+    } else {
+      saveLockout(lockout);
+      loginError.textContent = `Incorrect password. ${remaining} attempt${remaining === 1 ? '' : 's'} remaining.`;
+    }
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginPassword').focus();
   }
 });
 
@@ -358,17 +404,18 @@ function renderContactTab(data) {
 /* ═══════════════════════════════════════════════════
    SECURITY TAB
 ═══════════════════════════════════════════════════ */
-document.getElementById('changePasswordBtn').addEventListener('click', () => {
+document.getElementById('changePasswordBtn').addEventListener('click', async () => {
   const np  = document.getElementById('newPassword').value;
   const cp  = document.getElementById('confirmPassword').value;
   const msg = document.getElementById('securityMsg');
   msg.className = 'security-error';
 
   if (!np) { msg.classList.add('error'); msg.textContent = 'Please enter a new password.'; return; }
-  if (np.length < 6) { msg.classList.add('error'); msg.textContent = 'Password must be at least 6 characters.'; return; }
+  if (np.length < 8) { msg.classList.add('error'); msg.textContent = 'Password must be at least 8 characters.'; return; }
   if (np !== cp) { msg.classList.add('error'); msg.textContent = 'Passwords do not match.'; return; }
 
-  localStorage.setItem(PASS_KEY, np);
+  const hash = await sha256(np);
+  localStorage.setItem(PASS_KEY, hash);
   msg.classList.add('success');
   msg.textContent = 'Password updated successfully.';
   document.getElementById('newPassword').value = '';

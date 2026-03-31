@@ -41,7 +41,7 @@ const DEFAULT_DATA = {
       title: 'RAG Knowledge Base',
       desc: 'A production-ready Retrieval-Augmented Generation app that lets you upload documents (PDF, TXT, MD) and ask questions against them — getting grounded answers with full source citations.\n\nDocuments are chunked and embedded via gemini-embedding-001, with vectors stored in ChromaDB using cosine similarity. At query time, the top-k relevant chunks are retrieved and fed exclusively to Gemini 2.5 Flash, ensuring answers stay grounded in the uploaded content. The FastAPI backend handles document ingestion and retrieval, while the clean dark-mode UI provides suggested starter prompts and a real-time chat interface.',
       tags: ['RAG', 'Gemini AI', 'ChromaDB', 'FastAPI', 'Python'],
-      github: null,
+      github: 'https://github.com/dinoleix/rag-knowledge-base',
       demo: 'https://rag-knowledge-base-one.vercel.app/',
       cover: 'assets/screenshots/rag-knowledge-base.png',
       screenshots: [

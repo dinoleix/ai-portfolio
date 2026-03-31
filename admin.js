@@ -29,9 +29,9 @@ const DEFAULT_DATA = {
       tags: ['Gemini AI', 'React', 'TypeScript', 'Firebase', 'Vite', 'Real-time Analytics'],
       github: 'https://github.com/dinoleix/Neko-Metric-version-3.3',
       demo: 'https://neko-metric-version-3-3.vercel.app/',
-      cover: 'assets/screenshots/neko-ceo-dashboard.png',
+      cover: 'assets/screenshots/neko-metrics.svg',
       screenshots: [
-        { url: 'assets/screenshots/neko-ceo-dashboard.png', caption: 'CEO Dashboard — Real-time KPIs: Global Revenue ₹9,73,582 · Recommended Net Profit ₹1,13,123 · Group Net Margin 11.6% · Outlet Yield Rankings' },
+        { url: 'assets/screenshots/neko-metrics.svg', caption: 'Neko Metrics — P&L Command Center, Waste Radar v2, Outlet Yield Rankings, and AI-powered revenue projections' },
         { url: 'assets/screenshots/neko-sales-intelligence.png', caption: 'Sales Intelligence — Multi-month Performance: POS Revenue ₹9,350,645 · Outlet Velocity Comparison · Trajectory & Projections views' }
       ]
     },

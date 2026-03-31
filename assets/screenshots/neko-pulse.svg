@@ -1,0 +1,278 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="100%" style="stop-color:#0d1a2e"/>
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f2a1e"/>
+      <stop offset="100%" style="stop-color:#0a1f16"/>
+    </linearGradient>
+    <linearGradient id="glowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#10b981;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="roundedCard">
+      <rect x="0" y="0" width="800" height="450" rx="16"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)" rx="16"/>
+
+  <!-- Grid lines -->
+  <g opacity="0.04" stroke="#10b981" stroke-width="1">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+  </g>
+
+  <!-- Glow orb top-left -->
+  <circle cx="120" cy="120" r="120" fill="#10b981" opacity="0.05" filter="url(#softGlow)"/>
+  <!-- Glow orb bottom-right -->
+  <circle cx="680" cy="340" r="100" fill="#10b981" opacity="0.06" filter="url(#softGlow)"/>
+
+  <!-- Top glow line -->
+  <rect x="150" y="0" width="500" height="1" fill="url(#glowLine)" opacity="0.6"/>
+
+  <!-- Left panel: Face Recognition UI mock -->
+  <g transform="translate(48, 80)">
+    <!-- Panel bg -->
+    <rect width="210" height="290" rx="12" fill="url(#cardGrad1)" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.3"/>
+
+    <!-- Header -->
+    <rect width="210" height="36" rx="12" fill="#10b981" fill-opacity="0.15"/>
+    <rect width="210" height="20" y="16" fill="#10b981" fill-opacity="0.08"/>
+    <!-- header dots -->
+    <circle cx="16" cy="18" r="4" fill="#10b981" opacity="0.8"/>
+    <circle cx="30" cy="18" r="4" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="44" cy="18" r="4" fill="#ef4444" opacity="0.7"/>
+    <text x="105" y="23" text-anchor="middle" font-family="monospace" font-size="10" fill="#10b981" opacity="0.9">FACE RECOGNITION</text>
+
+    <!-- Face scan circle -->
+    <circle cx="105" cy="120" r="55" fill="none" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.5" stroke-dasharray="8 4"/>
+    <circle cx="105" cy="120" r="45" fill="#10b981" fill-opacity="0.05" stroke="#10b981" stroke-width="0.5" stroke-opacity="0.3"/>
+
+    <!-- Face icon simplified -->
+    <circle cx="105" cy="108" r="20" fill="none" stroke="#10b981" stroke-width="1.5" opacity="0.7"/>
+    <ellipse cx="97" cy="105" rx="3" ry="4" fill="#10b981" opacity="0.8"/>
+    <ellipse cx="113" cy="105" rx="3" ry="4" fill="#10b981" opacity="0.8"/>
+    <path d="M97 116 Q105 122 113 116" stroke="#10b981" stroke-width="1.5" fill="none" opacity="0.8"/>
+
+    <!-- Scan lines -->
+    <rect x="60" y="118" width="90" height="1.5" fill="#10b981" opacity="0.4"/>
+    <rect x="65" y="123" width="80" height="1" fill="#10b981" opacity="0.2"/>
+
+    <!-- Corner brackets -->
+    <path d="M65 80 L65 70 L75 70" stroke="#10b981" stroke-width="2" fill="none" filter="url(#glow)"/>
+    <path d="M145 80 L145 70 L135 70" stroke="#10b981" stroke-width="2" fill="none" filter="url(#glow)"/>
+    <path d="M65 160 L65 170 L75 170" stroke="#10b981" stroke-width="2" fill="none" filter="url(#glow)"/>
+    <path d="M145 160 L145 170 L135 170" stroke="#10b981" stroke-width="2" fill="none" filter="url(#glow)"/>
+
+    <!-- Status badge -->
+    <rect x="30" y="186" width="150" height="22" rx="11" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.5"/>
+    <circle cx="48" cy="197" r="4" fill="#10b981" filter="url(#glow)"/>
+    <text x="105" y="201" text-anchor="middle" font-family="monospace" font-size="9" fill="#10b981" opacity="0.9">IDENTITY VERIFIED</text>
+
+    <!-- Mini stats -->
+    <text x="16" y="228" font-family="monospace" font-size="8" fill="#10b981" opacity="0.5">CONFIDENCE</text>
+    <rect x="16" y="232" width="178" height="4" rx="2" fill="#10b981" fill-opacity="0.1"/>
+    <rect x="16" y="232" width="158" height="4" rx="2" fill="#10b981" fill-opacity="0.6"/>
+    <text x="194" y="237" font-family="monospace" font-size="7" fill="#10b981" opacity="0.7">89%</text>
+
+    <text x="16" y="252" font-family="monospace" font-size="8" fill="#10b981" opacity="0.5">CLOCK-IN</text>
+    <text x="194" y="252" text-anchor="end" font-family="monospace" font-size="8" fill="#10b981" opacity="0.8">09:01 AM</text>
+
+    <text x="16" y="268" font-family="monospace" font-size="8" fill="#10b981" opacity="0.5">SHIFT</text>
+    <text x="194" y="268" text-anchor="end" font-family="monospace" font-size="8" fill="#10b981" opacity="0.8">MORNING</text>
+
+    <text x="16" y="284" font-family="monospace" font-size="8" fill="#10b981" opacity="0.5">OUTLET</text>
+    <text x="194" y="284" text-anchor="end" font-family="monospace" font-size="8" fill="#10b981" opacity="0.8">KLCC-01</text>
+  </g>
+
+  <!-- Center: Main hero text -->
+  <g transform="translate(295, 85)">
+    <!-- Paw print icon -->
+    <g opacity="0.9" filter="url(#glow)">
+      <circle cx="105" cy="18" r="9" fill="#10b981" opacity="0.9"/>
+      <circle cx="88" cy="22" r="6" fill="#10b981" opacity="0.7"/>
+      <circle cx="122" cy="22" r="6" fill="#10b981" opacity="0.7"/>
+      <circle cx="80" cy="36" r="5" fill="#10b981" opacity="0.6"/>
+      <circle cx="130" cy="36" r="5" fill="#10b981" opacity="0.6"/>
+      <ellipse cx="105" cy="44" rx="18" ry="13" fill="#10b981" opacity="0.85"/>
+    </g>
+
+    <!-- Title -->
+    <text x="105" y="90" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="38" font-weight="800" fill="white" opacity="0.95" letter-spacing="-1">Neko Pulse</text>
+
+    <!-- Subtitle -->
+    <text x="105" y="116" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="13" fill="#10b981" opacity="0.85" letter-spacing="2">CREW INTELLIGENCE PLATFORM</text>
+
+    <!-- Divider -->
+    <rect x="30" y="128" width="150" height="1" fill="url(#emeraldGrad)" opacity="0.5"/>
+
+    <!-- Feature pills -->
+    <g transform="translate(0, 142)">
+      <!-- Row 1 -->
+      <rect x="0" y="0" width="94" height="22" rx="11" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.4"/>
+      <text x="47" y="15" text-anchor="middle" font-family="monospace" font-size="9" fill="#10b981" opacity="0.9">⬡ Face Biometrics</text>
+
+      <rect x="102" y="0" width="108" height="22" rx="11" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.4"/>
+      <text x="156" y="15" text-anchor="middle" font-family="monospace" font-size="9" fill="#10b981" opacity="0.9">⬡ QR Attendance</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="30" width="104" height="22" rx="11" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.4"/>
+      <text x="52" y="45" text-anchor="middle" font-family="monospace" font-size="9" fill="#10b981" opacity="0.9">⬡ Gemini AI Insights</text>
+
+      <rect x="112" y="30" width="98" height="22" rx="11" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.4"/>
+      <text x="161" y="45" text-anchor="middle" font-family="monospace" font-size="9" fill="#10b981" opacity="0.9">⬡ Shift Scheduling</text>
+
+      <!-- Row 3 -->
+      <rect x="26" y="60" width="80" height="22" rx="11" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.4"/>
+      <text x="66" y="75" text-anchor="middle" font-family="monospace" font-size="9" fill="#10b981" opacity="0.9">⬡ HR Suite</text>
+
+      <rect x="114" y="60" width="76" height="22" rx="11" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.4"/>
+      <text x="152" y="75" text-anchor="middle" font-family="monospace" font-size="9" fill="#10b981" opacity="0.9">⬡ PWA</text>
+    </g>
+
+    <!-- Tech stack row -->
+    <g transform="translate(0, 255)">
+      <text x="105" y="0" text-anchor="middle" font-family="monospace" font-size="8" fill="#64748b" opacity="0.8" letter-spacing="1">BUILT WITH</text>
+      <g transform="translate(0, 10)">
+        <rect x="0" y="0" width="46" height="18" rx="9" fill="#1e3a5f" fill-opacity="0.8"/>
+        <text x="23" y="13" text-anchor="middle" font-family="monospace" font-size="8" fill="#60a5fa">React 19</text>
+
+        <rect x="53" y="0" width="56" height="18" rx="9" fill="#1a2744" fill-opacity="0.8"/>
+        <text x="81" y="13" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8">TypeScript</text>
+
+        <rect x="116" y="0" width="50" height="18" rx="9" fill="#1e3a1a" fill-opacity="0.8"/>
+        <text x="141" y="13" text-anchor="middle" font-family="monospace" font-size="8" fill="#f97316">Firebase</text>
+
+        <rect x="173" y="0" width="37" height="18" rx="9" fill="#2a1a3e" fill-opacity="0.8"/>
+        <text x="191" y="13" text-anchor="middle" font-family="monospace" font-size="8" fill="#a78bfa">Vite 6</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right panel: Analytics dashboard mock -->
+  <g transform="translate(542, 80)">
+    <rect width="210" height="290" rx="12" fill="url(#cardGrad1)" stroke="#10b981" stroke-width="0.8" stroke-opacity="0.3"/>
+
+    <!-- Header -->
+    <rect width="210" height="36" rx="12" fill="#10b981" fill-opacity="0.15"/>
+    <rect width="210" height="20" y="16" fill="#10b981" fill-opacity="0.08"/>
+    <text x="105" y="23" text-anchor="middle" font-family="monospace" font-size="10" fill="#10b981" opacity="0.9">ANALYTICS DASHBOARD</text>
+
+    <!-- KPI cards -->
+    <g transform="translate(12, 46)">
+      <!-- Attendance rate -->
+      <rect width="88" height="52" rx="8" fill="#10b981" fill-opacity="0.08" stroke="#10b981" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="44" y="18" text-anchor="middle" font-family="monospace" font-size="8" fill="#10b981" opacity="0.6">ATTENDANCE</text>
+      <text x="44" y="36" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="700" fill="#10b981" filter="url(#glow)">94%</text>
+      <text x="44" y="48" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">▲ 2.1%</text>
+
+      <!-- Staff in -->
+      <rect x="96" width="102" height="52" rx="8" fill="#10b981" fill-opacity="0.08" stroke="#10b981" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="147" y="18" text-anchor="middle" font-family="monospace" font-size="8" fill="#10b981" opacity="0.6">STAFF IN TODAY</text>
+      <text x="147" y="36" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="700" fill="#10b981" filter="url(#glow)">47/50</text>
+      <text x="147" y="48" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">3 ON LEAVE</text>
+    </g>
+
+    <!-- Bar chart -->
+    <g transform="translate(12, 110)">
+      <text x="0" y="0" font-family="monospace" font-size="8" fill="#10b981" opacity="0.6">WEEKLY HOURS</text>
+
+      <!-- Bars -->
+      <g transform="translate(0, 8)">
+        <!-- MON -->
+        <rect x="0" y="0" width="20" height="72" rx="3" fill="#10b981" fill-opacity="0.08"/>
+        <rect x="0" y="14" width="20" height="58" rx="3" fill="#10b981" opacity="0.7"/>
+        <text x="10" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">M</text>
+
+        <!-- TUE -->
+        <rect x="27" y="0" width="20" height="72" rx="3" fill="#10b981" fill-opacity="0.08"/>
+        <rect x="27" y="8" width="20" height="64" rx="3" fill="#10b981" opacity="0.7"/>
+        <text x="37" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">T</text>
+
+        <!-- WED -->
+        <rect x="54" y="0" width="20" height="72" rx="3" fill="#10b981" fill-opacity="0.08"/>
+        <rect x="54" y="18" width="20" height="54" rx="3" fill="#10b981" opacity="0.5"/>
+        <text x="64" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">W</text>
+
+        <!-- THU -->
+        <rect x="81" y="0" width="20" height="72" rx="3" fill="#10b981" fill-opacity="0.08"/>
+        <rect x="81" y="5" width="20" height="67" rx="3" fill="#10b981" opacity="0.7"/>
+        <text x="91" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">T</text>
+
+        <!-- FRI -->
+        <rect x="108" y="0" width="20" height="72" rx="3" fill="#10b981" fill-opacity="0.08"/>
+        <rect x="108" y="20" width="20" height="52" rx="3" fill="#10b981" opacity="0.6"/>
+        <text x="118" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">F</text>
+
+        <!-- SAT -->
+        <rect x="135" y="0" width="20" height="72" rx="3" fill="#10b981" fill-opacity="0.08"/>
+        <rect x="135" y="30" width="20" height="42" rx="3" fill="#10b981" opacity="0.4"/>
+        <text x="145" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">S</text>
+
+        <!-- SUN -->
+        <rect x="162" y="0" width="20" height="72" rx="3" fill="#10b981" fill-opacity="0.08"/>
+        <rect x="162" y="45" width="20" height="27" rx="3" fill="#10b981" opacity="0.3"/>
+        <text x="172" y="82" text-anchor="middle" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">S</text>
+      </g>
+    </g>
+
+    <!-- AI Insights section -->
+    <g transform="translate(12, 222)">
+      <rect width="186" height="56" rx="8" fill="#10b981" fill-opacity="0.06" stroke="#10b981" stroke-width="0.5" stroke-opacity="0.3"/>
+      <text x="8" y="14" font-family="monospace" font-size="8" fill="#10b981" opacity="0.7">✦ AI INSIGHT</text>
+      <text x="8" y="28" font-family="monospace" font-size="8" fill="white" opacity="0.6">Late clock-ins ↑ Tues AM.</text>
+      <text x="8" y="40" font-family="monospace" font-size="8" fill="white" opacity="0.6">Consider shift buffer +10min</text>
+      <text x="8" y="52" font-family="monospace" font-size="7" fill="#10b981" opacity="0.5">powered by Gemini 2.5 Flash</text>
+    </g>
+  </g>
+
+  <!-- Bottom bar -->
+  <g transform="translate(0, 390)">
+    <rect width="800" height="60" fill="#10b981" fill-opacity="0.04"/>
+    <rect width="800" height="1" fill="url(#glowLine)" opacity="0.3"/>
+
+    <text x="48" y="35" font-family="monospace" font-size="10" fill="#10b981" opacity="0.6">PWA · INSTALLABLE · OFFLINE-CAPABLE</text>
+
+    <!-- Right badges -->
+    <g transform="translate(480, 18)">
+      <rect width="60" height="22" rx="11" fill="#1e3a5f" fill-opacity="0.8"/>
+      <text x="30" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#60a5fa">React 19</text>
+
+      <rect x="68" y="0" width="60" height="22" rx="11" fill="#1e2a44" fill-opacity="0.8"/>
+      <text x="98" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8">Firebase</text>
+
+      <rect x="136" y="0" width="60" height="22" rx="11" fill="#1a1a2e" fill-opacity="0.8"/>
+      <text x="166" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#a78bfa">Gemini AI</text>
+
+      <rect x="204" y="0" width="66" height="22" rx="11" fill="#1a2a1e" fill-opacity="0.8"/>
+      <text x="237" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#34d399">face-api.js</text>
+    </g>
+  </g>
+</svg>

@@ -62,6 +62,19 @@ const DEFAULT_DATA = {
       ]
     },
     {
+      id: 'neko-pulse',
+      featured: true,
+      title: 'Neko Pulse — Crew Intelligence Platform',
+      desc: 'A full-stack, PWA-ready crew management platform built for outlet operations. Combines biometric facial recognition, QR-code attendance, AI-powered insights, shift scheduling, HR management, and real-time analytics — all inside a single installable mobile-first app.\n\nBuilt with React 19 + TypeScript on the frontend, Firebase 12 (Firestore + Auth) as the real-time backend, and Google Gemini for natural language queries like "Who was late most this month?" Role-based access control (Admin, Manager, Crew) enforced at both the UI and Firestore security rules level. Installable on iOS and Android via PWA — no app store required.',
+      tags: ['React 19', 'TypeScript', 'Firebase', 'Gemini AI', 'face-api.js', 'PWA', 'Vite'],
+      github: 'https://github.com/dinoleix/Neko-Pulse-6.5',
+      demo: null,
+      cover: 'assets/screenshots/neko-pulse.svg',
+      screenshots: [
+        { url: 'assets/screenshots/neko-pulse.svg', caption: 'Neko Pulse — Crew Intelligence Platform with biometric face recognition, QR attendance, AI insights, and real-time analytics dashboard' }
+      ]
+    },
+    {
       id: 'eatpham',
       featured: false,
       title: 'Eatpham — Manipuri Restaurant Website',

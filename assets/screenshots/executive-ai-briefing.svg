@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#08080f"/>
+      <stop offset="100%" style="stop-color:#0d0d1e"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#2563eb"/>
+    </linearGradient>
+    <linearGradient id="glowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="14" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="#3b82f6" opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)" rx="16"/>
+  <rect width="800" height="450" fill="url(#dots)" rx="16"/>
+
+  <circle cx="400" cy="200" r="200" fill="#3b82f6" opacity="0.04" filter="url(#softGlow)"/>
+  <rect x="100" y="0" width="600" height="1" fill="url(#glowLine)" opacity="0.7"/>
+
+  <!-- Left panel: data sources -->
+  <g transform="translate(32, 90)">
+    <rect width="175" height="270" rx="10" fill="#0d1525" stroke="#3b82f6" stroke-width="0.7" stroke-opacity="0.25"/>
+    <rect width="175" height="28" rx="10" fill="#3b82f6" fill-opacity="0.1"/>
+    <rect width="175" height="14" y="14" fill="#3b82f6" fill-opacity="0.05"/>
+    <text x="88" y="18" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#93c5fd" opacity="0.9" letter-spacing="1">DATA SOURCES</text>
+
+    <g transform="translate(12, 40)" font-family="monospace" font-size="9">
+      <!-- Source 1 -->
+      <rect width="151" height="28" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.3"/>
+      <circle cx="12" cy="14" r="4" fill="#22c55e" opacity="0.8" filter="url(#glow)"/>
+      <text x="24" y="18" fill="#e2e8f0" opacity="0.7">Reuters Feed</text>
+      <text x="148" y="18" text-anchor="end" font-family="monospace" font-size="7" fill="#22c55e" opacity="0.7">LIVE</text>
+
+      <!-- Source 2 -->
+      <rect y="36" width="151" height="28" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.3"/>
+      <circle cx="12" cy="50" r="4" fill="#22c55e" opacity="0.8" filter="url(#glow)"/>
+      <text x="24" y="54" fill="#e2e8f0" opacity="0.7">Bloomberg</text>
+      <text x="148" y="54" text-anchor="end" font-family="monospace" font-size="7" fill="#22c55e" opacity="0.7">LIVE</text>
+
+      <!-- Source 3 -->
+      <rect y="72" width="151" height="28" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.3"/>
+      <circle cx="12" cy="86" r="4" fill="#f59e0b" opacity="0.8"/>
+      <text x="24" y="90" fill="#e2e8f0" opacity="0.7">Internal Reports</text>
+      <text x="148" y="90" text-anchor="end" font-family="monospace" font-size="7" fill="#f59e0b" opacity="0.7">4m ago</text>
+
+      <!-- Source 4 -->
+      <rect y="108" width="151" height="28" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.3"/>
+      <circle cx="12" cy="122" r="4" fill="#22c55e" opacity="0.8" filter="url(#glow)"/>
+      <text x="24" y="126" fill="#e2e8f0" opacity="0.7">Market Data API</text>
+      <text x="148" y="126" text-anchor="end" font-family="monospace" font-size="7" fill="#22c55e" opacity="0.7">LIVE</text>
+
+      <!-- Source 5 -->
+      <rect y="144" width="151" height="28" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.3"/>
+      <circle cx="12" cy="158" r="4" fill="#22c55e" opacity="0.8" filter="url(#glow)"/>
+      <text x="24" y="162" fill="#e2e8f0" opacity="0.7">Slack Channels</text>
+      <text x="148" y="162" text-anchor="end" font-family="monospace" font-size="7" fill="#22c55e" opacity="0.7">LIVE</text>
+
+      <!-- Arrow to center -->
+      <text x="155" y="96" font-family="monospace" font-size="14" fill="#3b82f6" opacity="0.5">→</text>
+    </g>
+
+    <!-- digest label -->
+    <text x="88" y="240" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6" opacity="0.45" letter-spacing="0.5">5 sources · ingesting</text>
+    <text x="88" y="255" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6" opacity="0.45">2,847 items / day</text>
+  </g>
+
+  <!-- Center: Briefing card -->
+  <g transform="translate(232, 68)">
+    <rect width="336" height="314" rx="12" fill="#0d1525" stroke="#3b82f6" stroke-width="0.8" stroke-opacity="0.3"/>
+    <!-- Header -->
+    <rect width="336" height="36" rx="12" fill="#3b82f6" fill-opacity="0.12"/>
+    <rect width="336" height="18" y="18" fill="#3b82f6" fill-opacity="0.06"/>
+    <text x="168" y="22" text-anchor="middle" font-family="monospace" font-size="9.5" fill="#93c5fd" letter-spacing="1">EXECUTIVE BRIEFING  ·  WK 13 2026</text>
+
+    <!-- Briefing content -->
+    <g transform="translate(16, 48)">
+      <!-- Headline -->
+      <text x="0" y="0" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="white" opacity="0.9">Market Intelligence Summary</text>
+      <text x="0" y="14" font-family="monospace" font-size="8" fill="#3b82f6" opacity="0.6">Generated by GPT-4 · Tue 31 Mar 2026 · 07:00 UTC</text>
+
+      <rect x="0" y="22" width="304" height="0.8" fill="#3b82f6" fill-opacity="0.2"/>
+
+      <!-- Section 1 -->
+      <rect x="0" y="30" width="3" height="44" rx="2" fill="#3b82f6" opacity="0.8"/>
+      <text x="10" y="43" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#93c5fd">Market Overview</text>
+      <text x="10" y="57" font-family="'Segoe UI', sans-serif" font-size="9" fill="#94a3b8">S&amp;P 500 ▲ 0.4% — Tech sector leads on AI earnings</text>
+      <text x="10" y="70" font-family="'Segoe UI', sans-serif" font-size="9" fill="#94a3b8">USD/EUR steady; BoE rate decision due Thursday</text>
+
+      <!-- Section 2 -->
+      <rect x="0" y="82" width="3" height="44" rx="2" fill="#a78bfa" opacity="0.8"/>
+      <text x="10" y="95" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#c4b5fd">Internal Highlights</text>
+      <text x="10" y="109" font-family="'Segoe UI', sans-serif" font-size="9" fill="#94a3b8">Q1 pipeline +12% vs target — 3 deals at final stage</text>
+      <text x="10" y="122" font-family="'Segoe UI', sans-serif" font-size="9" fill="#94a3b8">Infra incident resolved — SLA maintained at 99.94%</text>
+
+      <!-- Section 3 -->
+      <rect x="0" y="134" width="3" height="44" rx="2" fill="#f59e0b" opacity="0.7"/>
+      <text x="10" y="147" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="600" fill="#fbbf24">Action Items</text>
+      <text x="10" y="161" font-family="'Segoe UI', sans-serif" font-size="9" fill="#94a3b8">↳ Review APAC expansion proposal by EOW</text>
+      <text x="10" y="174" font-family="'Segoe UI', sans-serif" font-size="9" fill="#94a3b8">↳ Approve Q2 marketing budget allocation</text>
+
+      <!-- Divider -->
+      <rect x="0" y="186" width="304" height="0.8" fill="#3b82f6" fill-opacity="0.15"/>
+
+      <!-- Footer stats -->
+      <text x="0" y="202" font-family="monospace" font-size="8" fill="#3b82f6" opacity="0.5">DIGEST STATS</text>
+      <g transform="translate(0, 208)">
+        <rect width="68" height="46" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.25"/>
+        <text x="34" y="16" text-anchor="middle" font-family="monospace" font-size="7" fill="#93c5fd" opacity="0.6">ARTICLES</text>
+        <text x="34" y="34" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#3b82f6" filter="url(#glow)">284</text>
+
+        <rect x="76" y="0" width="68" height="46" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.25"/>
+        <text x="110" y="16" text-anchor="middle" font-family="monospace" font-size="7" fill="#93c5fd" opacity="0.6">READ TIME</text>
+        <text x="110" y="34" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#3b82f6" filter="url(#glow)">3min</text>
+
+        <rect x="152" y="0" width="68" height="46" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.25"/>
+        <text x="186" y="16" text-anchor="middle" font-family="monospace" font-size="7" fill="#93c5fd" opacity="0.6">SENTIMENT</text>
+        <text x="186" y="34" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#22c55e" filter="url(#glow)">+0.62</text>
+
+        <rect x="228" y="0" width="76" height="46" rx="6" fill="#3b82f6" fill-opacity="0.07" stroke="#3b82f6" stroke-width="0.5" stroke-opacity="0.25"/>
+        <text x="266" y="16" text-anchor="middle" font-family="monospace" font-size="7" fill="#93c5fd" opacity="0.6">NEXT DIGEST</text>
+        <text x="266" y="30" text-anchor="middle" font-family="monospace" font-size="9" fill="#3b82f6" opacity="0.8">Tomorrow</text>
+        <text x="266" y="42" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6" opacity="0.5">07:00 UTC</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right panel: weekly digest -->
+  <g transform="translate(584, 90)">
+    <rect width="185" height="270" rx="10" fill="#0d1525" stroke="#3b82f6" stroke-width="0.7" stroke-opacity="0.25"/>
+    <rect width="185" height="28" rx="10" fill="#3b82f6" fill-opacity="0.1"/>
+    <rect width="185" height="14" y="14" fill="#3b82f6" fill-opacity="0.05"/>
+    <text x="92" y="18" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#93c5fd" opacity="0.9" letter-spacing="1">WEEKLY EMAIL</text>
+    <!-- Email preview -->
+    <g transform="translate(10, 38)">
+      <rect width="165" height="200" rx="8" fill="#0a0f1e" stroke="#3b82f6" stroke-width="0.4" stroke-opacity="0.2"/>
+      <!-- Email chrome -->
+      <rect width="165" height="20" rx="8" fill="#3b82f6" fill-opacity="0.08"/>
+      <text x="82" y="13" text-anchor="middle" font-family="monospace" font-size="7" fill="#93c5fd" opacity="0.7">📧  Weekly Digest</text>
+      <!-- Lines representing content -->
+      <rect x="8" y="28" width="120" height="6" rx="3" fill="#3b82f6" fill-opacity="0.3"/>
+      <rect x="8" y="40" width="80" height="4" rx="2" fill="#3b82f6" fill-opacity="0.15"/>
+      <rect x="8" y="52" width="149" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <rect x="8" y="60" width="130" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <rect x="8" y="68" width="100" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <rect x="8" y="82" width="149" height="6" rx="3" fill="#3b82f6" fill-opacity="0.2"/>
+      <rect x="8" y="96" width="149" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <rect x="8" y="104" width="120" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <rect x="8" y="112" width="90" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <rect x="8" y="126" width="149" height="6" rx="3" fill="#a78bfa" fill-opacity="0.2"/>
+      <rect x="8" y="140" width="149" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <rect x="8" y="148" width="110" height="3" rx="1.5" fill="#475569" fill-opacity="0.4"/>
+      <!-- CTA button -->
+      <rect x="34" y="162" width="97" height="24" rx="12" fill="#3b82f6" fill-opacity="0.3"/>
+      <text x="82" y="178" text-anchor="middle" font-family="monospace" font-size="8" fill="#93c5fd">View Dashboard →</text>
+    </g>
+    <text x="92" y="252" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6" opacity="0.45">Sent every Monday 07:00</text>
+  </g>
+
+  <!-- IN THE WORKS badge -->
+  <g transform="translate(270, 22)">
+    <rect width="260" height="38" rx="19" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.5"/>
+    <circle cx="24" cy="19" r="5" fill="#3b82f6" opacity="0.9" filter="url(#glow)"/>
+    <circle cx="24" cy="19" r="9" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+    <text x="140" y="23" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#93c5fd" letter-spacing="2" opacity="0.95">IN THE WORKS</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="394" width="800" height="56" fill="#3b82f6" fill-opacity="0.03"/>
+  <rect x="0" y="394" width="800" height="1" fill="url(#glowLine)" opacity="0.3"/>
+  <text x="36" y="424" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.4" letter-spacing="1">NLP · MULTI-SOURCE · WEEKLY DIGEST · DASHBOARD</text>
+  <g transform="translate(500, 408)">
+    <rect width="40" height="22" rx="11" fill="#0d1525"/>
+    <text x="20" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#93c5fd">NLP</text>
+    <rect x="48" y="0" width="62" height="22" rx="11" fill="#0d1525"/>
+    <text x="79" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#93c5fd">Dashboard</text>
+    <rect x="118" y="0" width="46" height="22" rx="11" fill="#0d1525"/>
+    <text x="141" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#93c5fd">React</text>
+    <rect x="172" y="0" width="54" height="22" rx="11" fill="#0d1525"/>
+    <text x="199" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#fbbf24">GPT-4</text>
+    <rect x="234" y="0" width="56" height="22" rx="11" fill="#0d1525"/>
+    <text x="262" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#93c5fd">Email</text>
+  </g>
+</svg>

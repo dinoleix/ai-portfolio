@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#060d12"/>
+      <stop offset="100%" style="stop-color:#0a1520"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#0891b2"/>
+    </linearGradient>
+    <linearGradient id="glowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.7" fill="#06b6d4" opacity="0.1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)" rx="16"/>
+  <rect width="800" height="450" fill="url(#dots)" rx="16"/>
+
+  <!-- Ambient glow -->
+  <circle cx="400" cy="200" r="180" fill="#06b6d4" opacity="0.04" filter="url(#softGlow)"/>
+  <circle cx="150" cy="350" r="100" fill="#06b6d4" opacity="0.03" filter="url(#softGlow)"/>
+
+  <!-- Top line -->
+  <rect x="100" y="0" width="600" height="1" fill="url(#glowLine)" opacity="0.7"/>
+
+  <!-- Infrastructure node grid (background) -->
+  <g opacity="0.12" stroke="#06b6d4" stroke-width="0.8" fill="none">
+    <!-- Nodes -->
+    <rect x="80" y="80" width="36" height="22" rx="4"/>
+    <rect x="200" y="60" width="36" height="22" rx="4"/>
+    <rect x="340" y="90" width="36" height="22" rx="4"/>
+    <rect x="480" y="65" width="36" height="22" rx="4"/>
+    <rect x="610" y="80" width="36" height="22" rx="4"/>
+    <rect x="680" y="130" width="36" height="22" rx="4"/>
+    <rect x="120" y="360" width="36" height="22" rx="4"/>
+    <rect x="600" y="350" width="36" height="22" rx="4"/>
+    <!-- Connections -->
+    <line x1="116" y1="91" x2="200" y2="71"/>
+    <line x1="236" y1="71" x2="340" y2="101"/>
+    <line x1="376" y1="101" x2="480" y2="76"/>
+    <line x1="516" y1="76" x2="610" y2="91"/>
+    <line x1="646" y1="91" x2="680" y2="141"/>
+  </g>
+
+  <!-- Central terminal window -->
+  <g transform="translate(160, 100)">
+    <rect width="480" height="250" rx="12" fill="#0c1e2e" stroke="#06b6d4" stroke-width="0.8" stroke-opacity="0.3"/>
+    <!-- Title bar -->
+    <rect width="480" height="32" rx="12" fill="#06b6d4" fill-opacity="0.1"/>
+    <rect width="480" height="16" y="16" fill="#06b6d4" fill-opacity="0.05"/>
+    <circle cx="16" cy="16" r="4" fill="#ef4444" opacity="0.7"/>
+    <circle cx="30" cy="16" r="4" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="44" cy="16" r="4" fill="#22c55e" opacity="0.7"/>
+    <text x="240" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#06b6d4" opacity="0.8" letter-spacing="1">autonomous-it-agent  ~  bash</text>
+
+    <!-- Terminal content -->
+    <g transform="translate(20, 50)" font-family="monospace" font-size="10">
+      <text x="0" y="0" fill="#06b6d4" opacity="0.5">$</text>
+      <text x="14" y="0" fill="#e2e8f0" opacity="0.7"> monitor --infra prod-cluster --anomaly-detect</text>
+      <text x="0" y="18" fill="#22c55e" opacity="0.7">✓ Connected to 47 nodes</text>
+      <text x="0" y="34" fill="#22c55e" opacity="0.7">✓ Baseline established — P99 latency: 142ms</text>
+      <text x="0" y="50" fill="#f59e0b" opacity="0.8">⚠ Anomaly detected: node-12 CPU spike 94%</text>
+      <text x="0" y="66" fill="#06b6d4" opacity="0.7">  → Diagnosing root cause...</text>
+      <text x="0" y="82" fill="#06b6d4" opacity="0.7">  → Correlated with deploy @ 14:32 UTC</text>
+      <text x="0" y="98" fill="#22c55e" opacity="0.7">✓ Incident report drafted — MTTD: 4.2 min</text>
+      <text x="0" y="114" fill="#ef4444" opacity="0.7">✗ node-15 unreachable — escalating to PagerDuty</text>
+      <text x="0" y="130" fill="#e2e8f0" opacity="0.4">  ▊ <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.2s" repeatCount="indefinite"/></text>
+    </g>
+
+    <!-- Metric badges -->
+    <g transform="translate(20, 205)">
+      <rect width="90" height="28" rx="6" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="45" y="11" text-anchor="middle" font-family="monospace" font-size="7" fill="#06b6d4" opacity="0.6">MTTD REDUCTION</text>
+      <text x="45" y="23" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#06b6d4" filter="url(#glow)">−60%</text>
+
+      <rect x="100" width="100" height="28" rx="6" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="150" y="11" text-anchor="middle" font-family="monospace" font-size="7" fill="#06b6d4" opacity="0.6">NODES MONITORED</text>
+      <text x="150" y="23" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#06b6d4" filter="url(#glow)">47</text>
+
+      <rect x="210" width="90" height="28" rx="6" fill="#f59e0b" fill-opacity="0.08" stroke="#f59e0b" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="255" y="11" text-anchor="middle" font-family="monospace" font-size="7" fill="#f59e0b" opacity="0.6">ACTIVE ALERTS</text>
+      <text x="255" y="23" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#f59e0b" filter="url(#glow)">2</text>
+
+      <rect x="310" width="150" height="28" rx="6" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="385" y="11" text-anchor="middle" font-family="monospace" font-size="7" fill="#06b6d4" opacity="0.6">STACK</text>
+      <text x="385" y="23" text-anchor="middle" font-family="monospace" font-size="9" fill="#06b6d4" opacity="0.8">Agents · LangChain · API</text>
+    </g>
+  </g>
+
+  <!-- IN THE WORKS badge -->
+  <g transform="translate(270, 30)">
+    <rect width="260" height="38" rx="19" fill="#06b6d4" fill-opacity="0.12" stroke="#06b6d4" stroke-width="1.2" stroke-opacity="0.6"/>
+    <!-- pulse dot -->
+    <circle cx="24" cy="19" r="5" fill="#06b6d4" opacity="0.9" filter="url(#glow)"/>
+    <circle cx="24" cy="19" r="9" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.3"/>
+    <text x="140" y="23" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#06b6d4" letter-spacing="2" opacity="0.95">IN THE WORKS</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="394" width="800" height="56" fill="#06b6d4" fill-opacity="0.03"/>
+  <rect x="0" y="394" width="800" height="1" fill="url(#glowLine)" opacity="0.3"/>
+  <text x="36" y="424" font-family="monospace" font-size="10" fill="#06b6d4" opacity="0.45" letter-spacing="1">AUTONOMOUS MONITORING · AI DIAGNOSIS · AUTO-ESCALATION</text>
+  <g transform="translate(540, 408)">
+    <rect width="52" height="22" rx="11" fill="#0c2030"/>
+    <text x="26" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#06b6d4">Agents</text>
+    <rect x="59" y="0" width="66" height="22" rx="11" fill="#0c2030"/>
+    <text x="92" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#06b6d4">Automation</text>
+    <rect x="132" y="0" width="40" height="22" rx="11" fill="#0c2030"/>
+    <text x="152" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#06b6d4">API</text>
+    <rect x="179" y="0" width="68" height="22" rx="11" fill="#0c2030"/>
+    <text x="213" y="15" text-anchor="middle" font-family="monospace" font-size="8" fill="#f59e0b">LangChain</text>
+  </g>
+</svg>

@@ -4,19 +4,20 @@
 const DEFAULT_DATA = {
   profile: {
     name: 'Dino Leishangthem',
-    title: 'IT Pro & AI Enthusiast',
+    title: 'Strategic Leader and AI enthusiast',
     tagline: 'Bridging enterprise leadership with cutting-edge AI to build systems that matter.',
-    bio1: 'I lead enterprise IT strategy at scale — but what truly drives me is getting hands-on with the technology reshaping our world. I spend my nights and weekends building AI-powered tools, experimenting with large language models, and exploring what\'s possible at the frontier of machine intelligence.',
-    bio2: 'My projects live at the intersection of practical utility and technical curiosity — tools that solve real problems, built with modern AI stacks.',
+    bio1: 'At Capgemini France, I lead at scale — managing multiple enterprise engagements, owning business growth across the country account, and building the teams that make it happen.',
+    bio2: 'What sets me apart: I don\'t stop at strategy. I spend my time outside the office building AI-powered tools from scratch — working hands-on with LLMs, vector databases, and agentic systems.',
+    bio3: 'Projects built at the intersection of real utility and deep curiosity — because the best leaders in the AI era aren\'t just directing from above, they understand what they\'re directing.',
     status: 'Open to explore',
     photo: 'assets/dino.jpeg',
     badges: ['Machine Learning', 'LLMs & Agents', 'Enterprise IT', 'AI Strategy']
   },
   stats: [
-    { value: 15, label: 'Years in IT' },
-    { value: 12, label: 'AI Projects' },
-    { value: 500, label: 'GitHub Stars' },
-    { value: 8, label: 'Technologies' }
+    { value: 20, label: 'Years in IT' },
+    { value: 6, label: 'AI Projects' },
+    { value: 'PMP/EM2', label: 'Certifications' },
+    { value: 5, label: 'Industries' }
   ],
   techStack: ['React', 'TypeScript', 'Google Gemini AI', 'Firebase', 'Vite', 'Python', 'LangChain', 'OpenAI API', 'Anthropic Claude', 'RAG', 'FastAPI', 'Docker'],
   projects: [
